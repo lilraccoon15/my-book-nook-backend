@@ -117,9 +117,10 @@ app.get('/getBestRanked', async (req, res) => {
 app.get('/getBooksShelves', async (req, res) => {
     const { userId, shelf } = req.query;
     try {
-        const status = await bookQueries.getBooksShelves(userId, shelf);
-        if (status) {
-            res.status(200).json({ success: true, status });
+        const books = await bookQueries.getBooksShelves(userId, shelf);
+        console.log(books);
+        if (books) {
+            res.status(200).json({ success: true, books });
         } else {
             res.status(404).json({ success: false, message: 'Pas de livres' });
         }
@@ -132,9 +133,9 @@ app.get('/getBooksShelves', async (req, res) => {
 app.get('/getRank', async (req, res) => {
     const { bookId } = req.query;
     try {
-        const status = await bookQueries.getRank(bookId);
-        if (status) {
-            res.status(200).json({ success: true, status });
+        const rank = await bookQueries.getRank(bookId);
+        if (rank) {
+            res.status(200).json({ success: true, rank });
         } else {
             res.status(404).json({ success: false, message: 'Pas de moyenne' });
         }

@@ -144,8 +144,8 @@ exports.getBestRanked = async () => {
 
 exports.getBooksShelves = (userId, shelf) => {
     return new Promise((resolve, reject) => {
-        const sql = `SELECT * FROM registered_books WHERE user_id = ? AND ? = 1`;
-        connection.query(sql, [userId, shelf], async (err, results) => {
+        const sql = `SELECT * FROM registered_books WHERE user_id = ? AND ${shelf} = 1`;
+        connection.query(sql, [userId], async (err, results) => {
             if (err) {
                 reject(err);
             } else {
